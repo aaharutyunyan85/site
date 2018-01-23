@@ -1,11 +1,14 @@
 package hello;
 
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.nio.charset.StandardCharsets;
 
 @Controller
 public class GreetingController {
@@ -32,6 +35,13 @@ return "hello";
         return "login";
     }
 
+    @RequestMapping(value="/login",method= RequestMethod.POST)
+    public String loginpost(@RequestParam(value="email") String email,
+                               @RequestParam(value="pass") String pass) {
+            System.out.println(userRepostory.getByEmail(email));
+        return null;
+    }
+
     @RequestMapping(value="/register",method= RequestMethod.POST)
     public String registerpost(@RequestParam(value="fname") String fname,
                                @RequestParam(value="lname") String lname,
@@ -40,7 +50,10 @@ return "hello";
                                @RequestParam(value="passrep") String passrep) {
         // System.out.println(fname+"  "+lname+"  "+email+"  "+pass+"  "+passrep+"  ");
         if (pass.equals(passrep)) {
-            userRepostory.create(new User(fname, lname, email, pass));
+            final String hashed = Hashing.sha256()
+                    .hashString(pass, StandardCharsets.UTF_8)
+                    .toString();
+            userRepostory.create(new User(fname, lname, email, hashed));
             return "redirect:/login";
         } else {
             throw new IllegalArgumentException("Pass not same ");

@@ -26,6 +26,7 @@ targetCompatibility = 1.8
 
 dependencies {
    // compile group: 'org.springframework', name: 'spring-webmvc'
+    compile group: 'com.google.guava', name: 'guava', version: '23.6-jre'
     compile('org.springframework:spring-aop')
     compile group: 'org.hsqldb', name: 'hsqldb', version: '2.4.0'
     compile('org.springframework.boot:spring-boot-starter-data-jpa')

@@ -44,6 +44,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getByEmail(String email) {
-        return null;
+        return entityManager.createQuery("from User where email=:email",User.class).setParameter("email",email).getSingleResult();
     }
 }
