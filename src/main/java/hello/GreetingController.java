@@ -27,6 +27,10 @@ return "hello";
     public String register(){
         return "register";
     }
+    @RequestMapping(value="/login",method= RequestMethod.GET)
+    public String login(){
+        return "login";
+    }
 
     @RequestMapping(value="/register",method= RequestMethod.POST)
     public String registerpost(@RequestParam(value="fname") String fname,
@@ -37,7 +41,7 @@ return "hello";
         // System.out.println(fname+"  "+lname+"  "+email+"  "+pass+"  "+passrep+"  ");
         if (pass.equals(passrep)) {
             userRepostory.create(new User(fname, lname, email, pass));
-            return "hello";
+            return "redirect:/login";
         } else {
             throw new IllegalArgumentException("Pass not same ");
 

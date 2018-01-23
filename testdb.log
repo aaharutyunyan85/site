@@ -1,8 +1,6 @@
 /*C6*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C8*/SET SCHEMA PUBLIC
-create table Users (id bigint not null, email varchar(255), fname varchar(255), lname varchar(255), pass varchar(255), primary key (id))
-create sequence hibernate_sequence start with 1 increment by 1
 DISCONNECT
 /*C7*/SET SCHEMA PUBLIC
 DISCONNECT
