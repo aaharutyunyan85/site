@@ -17,7 +17,7 @@ public class User {
     private String fname;
     @Column
     private String lname;
-    @Column
+    @Column(unique = true)
     private String email;
     @Column
     private String pass;
