@@ -38,8 +38,27 @@ return "hello";
     @RequestMapping(value="/login",method= RequestMethod.POST)
     public String loginpost(@RequestParam(value="email") String email,
                                @RequestParam(value="pass") String pass) {
-            System.out.println(userRepostory.getByEmail(email));
-        return null;
+          //  System.out.println(userRepostory.getByEmail(email));
+        if(userRepostory.existByEmail(email)) {
+         User user = userRepostory.getByEmail(email);
+            final String hashed = Hashing.sha256()
+                    .hashString(pass, StandardCharsets.UTF_8)
+                    .toString();
+            if (hashed.equals(user.getPass())) {
+                return "redirect:/home";
+            }
+            else{
+                System.out.println("Wrong Pass");
+            }
+        }else {
+            System.out.println("Wrong Email");
+        }
+        return "login";
+    }
+
+    @RequestMapping(value="/home",method= RequestMethod.GET)
+    public String home(){
+        return "home";
     }
 
     @RequestMapping(value="/register",method= RequestMethod.POST)

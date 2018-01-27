@@ -10,4 +10,6 @@ public interface UserRepository {
     User getById(long id);
 
     User getByEmail(String email);
+
+    boolean existByEmail(String email);
 }
