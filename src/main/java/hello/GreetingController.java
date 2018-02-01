@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @SessionAttributes("user")
 @Controller
@@ -27,6 +28,14 @@ public class GreetingController {
         model.addAttribute("name", name);
         return "greeting";
     }
+
+    @RequestMapping("/admin")
+    public String admin(Model model) {
+        List<User> list = userRepostory.getAllUsers();
+        model.addAttribute("list", list);
+        return "admin";
+    }
+
 
     @RequestMapping("/hello")
     public String hello() {

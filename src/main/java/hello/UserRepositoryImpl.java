@@ -35,7 +35,7 @@ public class UserRepositoryImpl implements UserRepository {
     public void update(User user) {
         entityManager.merge(user);
 
-      //  return;
+        //  return;
     }
 
     @Override
@@ -45,12 +45,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getByEmail(String email) {
-        return entityManager.createQuery("from User where email=:email",User.class).setParameter("email",email).getSingleResult();
+        return entityManager.createQuery("from User where email=:email", User.class).setParameter("email", email).getSingleResult();
     }
 
     @Override
     public boolean existByEmail(String email) {
         List<User> resultList = entityManager.createQuery("from User where email=:email", User.class).setParameter("email", email).getResultList();
         return !resultList.isEmpty();
+    }
+
+    public List<User> getAllUsers() {
+        List<User> resultList = entityManager.createQuery("from User", User.class).getResultList();
+        return resultList;
     }
 }

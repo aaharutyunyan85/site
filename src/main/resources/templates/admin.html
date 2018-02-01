@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Admin</title>
+</head>
+<body>
+<h2>List of users</h2>
+
+<div th:each="user : ${list}">
+    <span th:text="${user}"/>
+
+</div>
+</body>
+</html>

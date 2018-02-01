@@ -1,5 +1,7 @@
 package hello;
 
+import java.util.List;
+
 public interface UserRepository {
     void create(User user);
 
@@ -12,4 +14,6 @@ public interface UserRepository {
     User getByEmail(String email);
 
     boolean existByEmail(String email);
+
+    List<User> getAllUsers();
 }
